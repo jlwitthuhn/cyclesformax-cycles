@@ -29,6 +29,13 @@
 #  include <pthread.h>
 #endif
 
+#ifndef __TBB_SOURCE_DIRECTLY_INCLUDED
+#define __TBB_SOURCE_DIRECTLY_INCLUDED 1
+#endif
+#ifndef __TBB_DYNAMIC_LOAD_ENABLED
+#define __TBB_DYNAMIC_LOAD_ENABLED 0
+#endif
+
 /* NOTE: Use tbb/spin_mutex.h instead of util_tbb.h because some of the TBB
  * functionality requires RTTI, which is disabled for OSL kernel. */
 #include <tbb/spin_mutex.h>

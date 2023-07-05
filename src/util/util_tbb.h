@@ -21,6 +21,13 @@
  * WIN32_LEAN_AND_MEAN and similar are defined beforehand. */
 #include "util_windows.h"
 
+#ifndef __TBB_SOURCE_DIRECTLY_INCLUDED
+#define __TBB_SOURCE_DIRECTLY_INCLUDED 1
+#endif
+#ifndef __TBB_DYNAMIC_LOAD_ENABLED
+#define __TBB_DYNAMIC_LOAD_ENABLED 0
+#endif
+
 #include <tbb/enumerable_thread_specific.h>
 #include <tbb/parallel_for.h>
 #include <tbb/task_arena.h>
