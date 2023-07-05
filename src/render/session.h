@@ -144,7 +144,7 @@ class Session {
   function<void(RenderTile &)> read_bake_tile_cb;
 
   explicit Session(const SessionParams &params);
-  ~Session();
+  virtual ~Session();
 
   void start();
   void cancel();
