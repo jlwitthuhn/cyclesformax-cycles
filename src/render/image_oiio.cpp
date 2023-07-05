@@ -32,7 +32,7 @@ OIIOImageLoader::~OIIOImageLoader()
 
 bool OIIOImageLoader::load_metadata(const ImageDeviceFeatures &features, ImageMetaData &metadata)
 {
-  return false
+  return false;
 }
 
 template<TypeDesc::BASETYPE FileFormat, typename StorageType>
