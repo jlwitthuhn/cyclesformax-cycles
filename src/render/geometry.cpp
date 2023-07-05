@@ -54,6 +54,10 @@ PackFlags operator|=(PackFlags &pack_flags, uint32_t value)
 
 NODE_ABSTRACT_DEFINE(Geometry)
 {
+  if (const auto maybe_me = NodeType::find(ustring("geometry_base"))) {
+    return maybe_me;
+  }
+
   NodeType *type = NodeType::add("geometry_base", NULL);
 
   SOCKET_UINT(motion_steps, "Motion Steps", 3);
