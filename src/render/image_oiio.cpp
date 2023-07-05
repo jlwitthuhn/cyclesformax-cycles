@@ -32,75 +32,7 @@ OIIOImageLoader::~OIIOImageLoader()
 
 bool OIIOImageLoader::load_metadata(const ImageDeviceFeatures &features, ImageMetaData &metadata)
 {
-  /* Perform preliminary checks, with meaningful logging. */
-  if (!path_exists(filepath.string())) {
-    VLOG(1) << "File '" << filepath.string() << "' does not exist.";
-    return false;
-  }
-  if (path_is_directory(filepath.string())) {
-    VLOG(1) << "File '" << filepath.string() << "' is a directory, can't use as image.";
-    return false;
-  }
-
-  unique_ptr<ImageInput> in(ImageInput::create(filepath.string()));
-
-  if (!in) {
-    return false;
-  }
-
-  ImageSpec spec;
-  if (!in->open(filepath.string(), spec)) {
-    return false;
-  }
-
-  metadata.width = spec.width;
-  metadata.height = spec.height;
-  metadata.depth = spec.depth;
-  metadata.compress_as_srgb = false;
-
-  /* Check the main format, and channel formats. */
-  size_t channel_size = spec.format.basesize();
-
-  bool is_float = false;
-  bool is_half = false;
-
-  if (spec.format.is_floating_point()) {
-    is_float = true;
-  }
-
-  for (size_t channel = 0; channel < spec.channelformats.size(); channel++) {
-    channel_size = max(channel_size, spec.channelformats[channel].basesize());
-    if (spec.channelformats[channel].is_floating_point()) {
-      is_float = true;
-    }
-  }
-
-  /* check if it's half float */
-  if (spec.format == TypeDesc::HALF && features.has_half_float) {
-    is_half = true;
-  }
-
-  /* set type and channels */
-  metadata.channels = spec.nchannels;
-
-  if (is_half) {
-    metadata.type = (metadata.channels > 1) ? IMAGE_DATA_TYPE_HALF4 : IMAGE_DATA_TYPE_HALF;
-  }
-  else if (is_float) {
-    metadata.type = (metadata.channels > 1) ? IMAGE_DATA_TYPE_FLOAT4 : IMAGE_DATA_TYPE_FLOAT;
-  }
-  else if (spec.format == TypeDesc::USHORT) {
-    metadata.type = (metadata.channels > 1) ? IMAGE_DATA_TYPE_USHORT4 : IMAGE_DATA_TYPE_USHORT;
-  }
-  else {
-    metadata.type = (metadata.channels > 1) ? IMAGE_DATA_TYPE_BYTE4 : IMAGE_DATA_TYPE_BYTE;
-  }
-
-  metadata.colorspace_file_format = in->format_name();
-
-  in->close();
-
-  return true;
+  return false
 }
 
 template<TypeDesc::BASETYPE FileFormat, typename StorageType>
@@ -168,55 +100,7 @@ bool OIIOImageLoader::load_pixels(const ImageMetaData &metadata,
                                   const size_t,
                                   const bool associate_alpha)
 {
-  unique_ptr<ImageInput> in = NULL;
-
-  /* NOTE: Error logging is done in meta data acquisition. */
-  if (!path_exists(filepath.string()) || path_is_directory(filepath.string())) {
-    return false;
-  }
-
-  /* load image from file through OIIO */
-  in = unique_ptr<ImageInput>(ImageInput::create(filepath.string()));
-  if (!in) {
-    return false;
-  }
-
-  ImageSpec spec = ImageSpec();
-  ImageSpec config = ImageSpec();
-
-  if (!associate_alpha) {
-    config.attribute("oiio:UnassociatedAlpha", 1);
-  }
-
-  if (!in->open(filepath.string(), spec, config)) {
-    return false;
-  }
-
-  switch (metadata.type) {
-    case IMAGE_DATA_TYPE_BYTE:
-    case IMAGE_DATA_TYPE_BYTE4:
-      oiio_load_pixels<TypeDesc::UINT8, uchar>(metadata, in, (uchar *)pixels);
-      break;
-    case IMAGE_DATA_TYPE_USHORT:
-    case IMAGE_DATA_TYPE_USHORT4:
-      oiio_load_pixels<TypeDesc::USHORT, uint16_t>(metadata, in, (uint16_t *)pixels);
-      break;
-    case IMAGE_DATA_TYPE_HALF:
-    case IMAGE_DATA_TYPE_HALF4:
-      oiio_load_pixels<TypeDesc::HALF, half>(metadata, in, (half *)pixels);
-      break;
-    case IMAGE_DATA_TYPE_FLOAT:
-    case IMAGE_DATA_TYPE_FLOAT4:
-      oiio_load_pixels<TypeDesc::FLOAT, float>(metadata, in, (float *)pixels);
-      break;
-    case IMAGE_DATA_TYPE_NANOVDB_FLOAT:
-    case IMAGE_DATA_TYPE_NANOVDB_FLOAT3:
-    case IMAGE_DATA_NUM_TYPES:
-      break;
-  }
-
-  in->close();
-  return true;
+  return false;
 }
 
 string OIIOImageLoader::name() const
