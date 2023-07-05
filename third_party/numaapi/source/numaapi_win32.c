@@ -26,9 +26,6 @@
 
 #include "numaapi.h"
 
-#ifndef NOGDI
-#  define NOGDI
-#endif
 #ifndef NOMINMAX
 #  define NOMINMAX
 #endif

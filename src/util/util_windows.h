@@ -19,9 +19,6 @@
 
 #ifdef _WIN32
 
-#  ifndef NOGDI
-#    define NOGDI
-#  endif
 #  ifndef NOMINMAX
 #    define NOMINMAX
 #  endif

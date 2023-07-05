@@ -31,7 +31,6 @@
 
 #include "atomic_ops_utils.h"
 
-#define NOGDI
 #ifndef NOMINMAX
 #  define NOMINMAX
 #endif
