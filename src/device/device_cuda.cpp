@@ -146,11 +146,12 @@ void device_cuda_info(vector<DeviceInfo> &devices, bool include_extra_cuda)
     cuDeviceGetAttribute(&pci_location[0], CU_DEVICE_ATTRIBUTE_PCI_DOMAIN_ID, num);
     cuDeviceGetAttribute(&pci_location[1], CU_DEVICE_ATTRIBUTE_PCI_BUS_ID, num);
     cuDeviceGetAttribute(&pci_location[2], CU_DEVICE_ATTRIBUTE_PCI_DEVICE_ID, num);
-    info.id = string_printf("CUDA_%s_%04x:%02x:%02x",
-                            name,
-                            (unsigned int)pci_location[0],
-                            (unsigned int)pci_location[1],
-                            (unsigned int)pci_location[2]);
+	const std::string pci_info = string_printf(" - %04x:%02x:%02x",
+		(unsigned int)pci_location[0],
+		(unsigned int)pci_location[1],
+		(unsigned int)pci_location[2]);
+	info.description = info.description + pci_info;
+	info.id = string_printf("CUDA_%d", num);
 
     /* If device has a kernel timeout and no compute preemption, we assume
      * it is connected to a display and will freeze the display while doing
