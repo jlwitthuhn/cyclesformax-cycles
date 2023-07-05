@@ -418,8 +418,8 @@ class OptiXDevice : public CUDADevice {
 
     {  // Load and compile PTX module with OptiX kernels
       string ptx_data, ptx_filename = path_get(requested_features.use_shader_raytrace ?
-                                                   "lib/kernel_optix_shader_raytrace.ptx" :
-                                                   "lib/kernel_optix.ptx");
+                                                   "Plugins/cycles/kernel/kernel_optix_shader_raytrace.ptx" :
+                                                   "Plugins/cycles/kernel/kernel_optix.ptx");
       if (use_adaptive_compilation() || path_file_size(ptx_filename) == -1) {
         if (!getenv("OPTIX_ROOT_DIR")) {
           set_error(

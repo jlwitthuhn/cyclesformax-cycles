@@ -120,7 +120,7 @@ class CUDAContextScope {
 
 bool CUDADevice::have_precompiled_kernels()
 {
-  string cubins_path = path_get("lib");
+  string cubins_path = path_get("Plugins/cycles/kernel");
   return path_exists(cubins_path);
 }
 
@@ -379,7 +379,7 @@ string CUDADevice::compile_kernel(const DeviceRequestedFeatures &requested_featu
   /* Attempt to use kernel provided with Blender. */
   if (!use_adaptive_compilation()) {
     if (!force_ptx) {
-      const string cubin = path_get(string_printf("lib/%s_sm_%d%d.cubin", name, major, minor));
+      const string cubin = path_get(string_printf("Plugins/cycles/kernel/%s_sm_%d%d.cubin", name, major, minor));
       VLOG(1) << "Testing for pre-compiled kernel " << cubin << ".";
       if (path_exists(cubin)) {
         VLOG(1) << "Using precompiled kernel.";
@@ -391,7 +391,7 @@ string CUDADevice::compile_kernel(const DeviceRequestedFeatures &requested_featu
     int ptx_major = major, ptx_minor = minor;
     while (ptx_major >= 3) {
       const string ptx = path_get(
-          string_printf("lib/%s_compute_%d%d.ptx", name, ptx_major, ptx_minor));
+          string_printf("Plugins/cycles/kernel/%s_compute_%d%d.ptx", name, ptx_major, ptx_minor));
       VLOG(1) << "Testing for pre-compiled kernel " << ptx << ".";
       if (path_exists(ptx)) {
         VLOG(1) << "Using precompiled kernel.";
