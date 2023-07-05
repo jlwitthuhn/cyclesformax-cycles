@@ -19,7 +19,7 @@
 
 /* PugiXML is used for XML parsing. */
 
-#include <pugixml.hpp>
+#include <detail/pugixml/pugixml.hpp>
 
 CCL_NAMESPACE_BEGIN
 
