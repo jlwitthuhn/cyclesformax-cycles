@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+include(cyclesformax)
 
 ###########################################################################
 # Helper macros
@@ -122,15 +123,6 @@ endif()
 ###########################################################################
 
 if(WITH_CYCLES_STANDALONE AND WITH_CYCLES_STANDALONE_GUI)
-  if(MSVC AND EXISTS ${_cycles_lib_dir})
-    add_definitions(-DFREEGLUT_STATIC -DFREEGLUT_LIB_PRAGMAS=0)
-    set(GLUT_FOUND ON)
-    set(GLUT_LIBRARIES "${_cycles_lib_dir}/opengl/lib/freeglut_static.lib")
-    set(GLUT_INCLUDE_DIR "${_cycles_lib_dir}/opengl/include")
-  else()
-    find_package(GLUT)
-  endif()
-
   if(GLUT_FOUND)
     include_directories(
       SYSTEM
@@ -254,7 +246,7 @@ if(CYCLES_STANDALONE_REPOSITORY)
   endif()
 
   find_package(JPEG REQUIRED)
-  find_package(OpenJPEG REQUIRED)
+  #find_package(OpenJPEG REQUIRED)
   find_package(TIFF REQUIRED)
   find_package(PNG REQUIRED)
 endif()
