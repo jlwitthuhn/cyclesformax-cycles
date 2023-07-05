@@ -10,7 +10,7 @@ You will also need some nVidia SDKs to build a plugin that can target CUDA and O
 * [OptiX SDK 7.1.0](https://developer.nvidia.com/designworks/optix/downloads/legacy)
 * [CUDA Toolkit 11.4](https://developer.nvidia.com/cuda-11-4-0-download-archive)
 
-If you want to support Kepler cards (GTX 600/700 series) you will need and older CUDA Toolkit and modify the `CYCLES_CUDA_BINARIES_ARCH` cmake variable:
+If you want to support Kepler cards (GTX 600/700 series) you will need to install an older CUDA Toolkit and modify the `CYCLES_CUDA_BINARIES_ARCH` cmake variable:
 * [CUDA Toolkit 10.2](https://developer.nvidia.com/cuda-10.2-download-archive)
 
 # Versions
