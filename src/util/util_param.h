@@ -19,10 +19,14 @@
 
 /* Parameter value lists from OpenImageIO are used to store custom properties
  * on various data, which can then later be used in shaders. */
+#pragma warning( push )
+#pragma warning( disable: 4100 4267 4800 )
 
 #include <OpenImageIO/paramlist.h>
 #include <OpenImageIO/typedesc.h>
 #include <OpenImageIO/ustring.h>
+
+#pragma warning( pop )
 
 CCL_NAMESPACE_BEGIN
 
