@@ -23,11 +23,7 @@
 #include "util/util_version.h"
 #include "util/util_view.h"
 
-#ifdef __APPLE__
-#  include <GLUT/glut.h>
-#else
-#  include <GL/glut.h>
-#endif
+#include <GL/freeglut.h>
 
 CCL_NAMESPACE_BEGIN
 
