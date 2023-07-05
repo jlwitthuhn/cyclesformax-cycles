@@ -1,16 +1,25 @@
 add_definitions(-D__TBB_NO_IMPLICIT_LINKAGE)
-add_definitions("-DBOOST_ALL_NO_LIB")
+add_definitions(-DBOOST_ALL_NO_LIB)
 add_definitions(-DFREEGLUT_STATIC)
 add_definitions(-DGLEW_STATIC)
 add_definitions(-DOIIO_STATIC_BUILD)
 add_definitions(-DOIIO_STATIC_DEFINE)
 
-set(MY_LIB_DIR "C:/Dev/CyclesMax/libs_autobuild/v140r/")
+set(MY_LIB_ROOT "C:/Dev/CyclesMax/libs_autobuild/")
+if(MSVC_TOOLSET_VERSION EQUAL "140")
+    set(MY_LIB_DIR "${MY_LIB_ROOT}/v140r/")
+elseif(MSVC_TOOLSET_VERSION EQUAL "141")
+    set(MY_LIB_DIR "${MY_LIB_ROOT}/v141r/")
+elseif(MSVC_TOOLSET_VERSION EQUAL "142")
+    set(MY_LIB_DIR "${MY_LIB_ROOT}/v142r/")
+else()
+    message(FATAL_ERROR "Only Visual Studio 2015, 2017, and 2019 are supported.")
+endif()
 
 set(TBB_INCLUDE_DIR "${MY_LIB_DIR}/oneTBB-2021.3.0/include/")
 set(TBB_LIBRARY "${MY_LIB_DIR}/oneTBB-2021.3.0/lib/tbb.lib")
 
-set(PNG_PNG_INCLUDE_DIR "D${MY_LIB_DIR}/libpng-1.6.39/include/")
+set(PNG_PNG_INCLUDE_DIR "${MY_LIB_DIR}/libpng-1.6.39/include/")
 set(PNG_LIBRARY "${MY_LIB_DIR}/libpng-1.6.39/lib/libpng16_static.lib")
 
 set(TIFF_INCLUDE_DIR "${MY_LIB_DIR}/libtiff-4.5.0/include/")
