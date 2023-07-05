@@ -34,6 +34,9 @@
 
 #include "util/util_types.h"
 
+#pragma warning( push )
+#pragma warning( disable: 4146 )
+
 CCL_NAMESPACE_BEGIN
 
 /* Float Pi variations */
@@ -798,5 +801,7 @@ ccl_device_inline float precise_angle(float3 a, float3 b)
 }
 
 CCL_NAMESPACE_END
+
+#pragma warning( pop )
 
 #endif /* __UTIL_MATH_H__ */
