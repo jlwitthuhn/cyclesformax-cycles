@@ -239,6 +239,8 @@ class Session {
 
   /* progressive refine */
   bool update_progressive_refine(bool cancel);
+
+  std::atomic<bool> session_running{ false };
 };
 
 CCL_NAMESPACE_END

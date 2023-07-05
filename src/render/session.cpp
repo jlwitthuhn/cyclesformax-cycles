@@ -867,6 +867,8 @@ void Session::run_cpu()
 
 void Session::run()
 {
+  session_running = true;
+
   if (params.use_profiling && (params.device.type == DEVICE_CPU)) {
     profiler.start();
   }
@@ -892,6 +894,8 @@ void Session::run()
     progress.set_status(progress.get_cancel_message());
   else
     progress.set_update();
+
+  session_running = false;
 }
 
 bool Session::draw(BufferParams &buffer_params, DeviceDrawParams &draw_params)
