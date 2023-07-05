@@ -17,6 +17,8 @@
 #ifndef __BACKGROUND_H__
 #define __BACKGROUND_H__
 
+#include "shader.h"
+
 #include "graph/node.h"
 
 #include "util/util_types.h"
