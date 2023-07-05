@@ -469,7 +469,7 @@ class Device {
   static DeviceType type_from_string(const char *name);
   static string string_from_type(DeviceType type);
   static vector<DeviceType> available_types();
-  static vector<DeviceInfo> available_devices(uint device_type_mask = DEVICE_MASK_ALL);
+  static vector<DeviceInfo> available_devices(uint device_type_mask = DEVICE_MASK_ALL, bool include_extra_cuda = false);
   static DeviceInfo dummy_device(const string &error_msg = "");
   static string device_capabilities(uint device_type_mask = DEVICE_MASK_ALL);
   static DeviceInfo get_multi_device(const vector<DeviceInfo> &subdevices,

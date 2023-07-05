@@ -87,7 +87,7 @@ static CUresult device_cuda_safe_init()
 #  endif
 }
 
-void device_cuda_info(vector<DeviceInfo> &devices)
+void device_cuda_info(vector<DeviceInfo> &devices, bool include_extra_cuda)
 {
   CUresult result = device_cuda_safe_init();
   if (result != CUDA_SUCCESS) {
@@ -182,6 +182,13 @@ void device_cuda_info(vector<DeviceInfo> &devices)
 
   if (!display_devices.empty())
     devices.insert(devices.end(), display_devices.begin(), display_devices.end());
+
+  if (include_extra_cuda)
+  {
+	  ccl::DeviceInfo debug_info = devices.front();
+	  debug_info.id = "CUDA_DEBUG";
+	  devices.push_back(debug_info);
+  }
 }
 
 string device_cuda_capabilities()

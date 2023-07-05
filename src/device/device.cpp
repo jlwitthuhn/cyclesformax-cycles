@@ -485,7 +485,7 @@ vector<DeviceType> Device::available_types()
   return types;
 }
 
-vector<DeviceInfo> Device::available_devices(uint mask)
+vector<DeviceInfo> Device::available_devices(uint mask, const bool include_extra_cuda)
 {
   /* Lazy initialize devices. On some platforms OpenCL or CUDA drivers can
    * be broken and cause crashes when only trying to get device info, so
@@ -511,7 +511,7 @@ vector<DeviceInfo> Device::available_devices(uint mask)
   if (mask & (DEVICE_MASK_CUDA | DEVICE_MASK_OPTIX)) {
     if (!(devices_initialized_mask & DEVICE_MASK_CUDA)) {
       if (device_cuda_init()) {
-        device_cuda_info(cuda_devices);
+        device_cuda_info(cuda_devices, include_extra_cuda);
       }
       devices_initialized_mask |= DEVICE_MASK_CUDA;
     }
